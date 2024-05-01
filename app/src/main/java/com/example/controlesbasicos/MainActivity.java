@@ -1,4 +1,4 @@
-package com.ugb.controlesbasicos;
+package com.example.controlesbasicos;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Intent tomarFotoIntent;
     ImageView img;
     utilidades utls;
-    com.ugb.controlesbasicos.DetectarInternet di;
+    DetectarInternet di;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
                     datosProductos.put("foto", foto);
                     String respuesta = "";
 
-                    di = new com.ugb.controlesbasicos.DetectarInternet(getApplicationContext());
+                    di = new DetectarInternet(getApplicationContext());
 
                     if(di.hayConexionInternet()){
-                        com.ugb.controlesbasicos.EnviarDatosServidor objGuardarDatosServidor = new com.ugb.controlesbasicos.EnviarDatosServidor(getApplicationContext());
+                        EnviarDatosServidor objGuardarDatosServidor = new EnviarDatosServidor(getApplicationContext());
                         respuesta = objGuardarDatosServidor.execute(datosProductos.toString()).get();
 
                         JSONObject respuestaJSONObject = new JSONObject(respuesta);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    com.ugb.controlesbasicos.DB db = new com.ugb.controlesbasicos.DB(getApplicationContext(), "", null, 1);
+                    DB db = new DB(getApplicationContext(), "", null, 1);
                     String[] datos = new String[]{id, rev, idProducto, codigo, descripcion, marca, presentacion, precio, foto};
                     respuesta = db.administrar_Productos(accion, datos);
 
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
     private void regresarListaProducto(){
-        Intent abrirVentana = new Intent(getApplicationContext(), com.ugb.controlesbasicos.lista_producto.class);
+        Intent abrirVentana = new Intent(getApplicationContext(), lista_producto.class);
         startActivity(abrirVentana);
     }
 

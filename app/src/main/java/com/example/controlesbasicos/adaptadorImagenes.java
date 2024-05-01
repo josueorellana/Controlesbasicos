@@ -1,4 +1,4 @@
-package com.ugb.controlesbasicos;
+package com.example.controlesbasicos;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.controlesbasicos.R;
 
 import java.util.ArrayList;
 

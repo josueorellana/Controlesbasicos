@@ -1,4 +1,4 @@
-package com.ugb.controlesbasicos;
+package com.example.controlesbasicos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -36,7 +36,7 @@ public class lista_producto extends AppCompatActivity {
     FloatingActionButton btn;
     ListView lts;
     Cursor cProducto;
-    com.ugb.controlesbasicos.DB db_producto;
+    DB db_producto;
     producto misProductos;
 
     final ArrayList<producto> alProducto=new ArrayList<producto>();
@@ -44,7 +44,7 @@ public class lista_producto extends AppCompatActivity {
     JSONArray datosJSON;
     JSONObject jsonObject;
     ObtenerDatosServidor datosServidor;
-    com.ugb.controlesbasicos.DetectarInternet di;
+    DetectarInternet di;
     int posicion = 0;
     String respuesta = "";
     @Override
@@ -52,7 +52,7 @@ public class lista_producto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_producto);
 
-        db_producto = new com.ugb.controlesbasicos.DB(lista_producto.this, "", null, 1);
+        db_producto = new DB(lista_producto.this, "", null, 1);
 
         btn = findViewById(R.id.btnAbrirNuevosProductos);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +63,7 @@ public class lista_producto extends AppCompatActivity {
             }
         });
         try {
-            di = new com.ugb.controlesbasicos.DetectarInternet(getApplicationContext());
+            di = new DetectarInternet(getApplicationContext());
             if(di.hayConexionInternet()){
                 obtenerDatosProductosServidor();
             }else {
@@ -111,14 +111,14 @@ public class lista_producto extends AppCompatActivity {
                     );
                     alProducto.add(misProductos);
                 }
-                com.ugb.controlesbasicos.adaptadorImagenes adImagenes = new com.ugb.controlesbasicos.adaptadorImagenes(getApplicationContext(), alProducto);
+                adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                 lts.setAdapter(adImagenes);
                 alProductoCopy.addAll(alProducto);
 
                 registerForContextMenu(lts);
             } else {
                 alProducto.clear();
-                com.ugb.controlesbasicos.adaptadorImagenes adImagenes = new com.ugb.controlesbasicos.adaptadorImagenes(getApplicationContext(), alProducto);
+                adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                 lts.setAdapter(adImagenes);
                 adImagenes.notifyDataSetChanged();
 
@@ -226,7 +226,7 @@ public class lista_producto extends AppCompatActivity {
             String respuesta = "";
             datosProductos.remove("_id");
             datosProductos.remove("_rev");
-            com.ugb.controlesbasicos.EnviarDatosServidor objGuardarDatosServidor = new com.ugb.controlesbasicos.EnviarDatosServidor(getApplicationContext());
+            EnviarDatosServidor objGuardarDatosServidor = new EnviarDatosServidor(getApplicationContext());
             respuesta = objGuardarDatosServidor.execute(datosProductos.toString()).get();
             JSONObject respuestaJSONObject = new JSONObject(respuesta);
             mostrarMsg(respuesta);
@@ -273,7 +273,7 @@ public class lista_producto extends AppCompatActivity {
                 MostrarProductos();
             } else {
                 alProducto.clear();
-                com.ugb.controlesbasicos.adaptadorImagenes adImagenes = new com.ugb.controlesbasicos.adaptadorImagenes(getApplicationContext(), alProducto);
+               adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                 lts.setAdapter(adImagenes);
                 adImagenes.notifyDataSetChanged();
 
@@ -303,7 +303,7 @@ public class lista_producto extends AppCompatActivity {
                     if( valor.length()<=0 ){
                         alProducto.addAll(alProductoCopy);
                     }else{
-                        for( producto Producto : alProductoCopy ){
+                        for(producto Producto : alProductoCopy ){
                             String codigo = Producto.getCodigo();
                             String descripcion = Producto.getDescripcion();
                             String marca = Producto.getMarca();
@@ -315,7 +315,7 @@ public class lista_producto extends AppCompatActivity {
                                 alProducto.add(Producto);
                             }
                         }
-                        com.ugb.controlesbasicos.adaptadorImagenes adImagenes = new com.ugb.controlesbasicos.adaptadorImagenes(getApplicationContext(), alProducto);
+                        adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                         lts.setAdapter(adImagenes);
                     }
                 }catch (Exception e){

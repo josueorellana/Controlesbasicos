@@ -1,4 +1,4 @@
-package com.ugb.controlesbasicos;
+package com.example.controlesbasicos;
 
 public class producto {
     String _id;

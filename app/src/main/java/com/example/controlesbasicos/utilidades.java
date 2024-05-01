@@ -1,4 +1,4 @@
-package com.ugb.controlesbasicos;
+package com.example.controlesbasicos;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
