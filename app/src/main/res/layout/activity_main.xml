@@ -11,117 +11,100 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/lblnum1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Num 1:"
-        android:textSize="19dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="40dp" />
-
-    <EditText
-        android:id="@+id/txtnum1"
-        android:layout_width="match_parent"
-        android:layout_marginRight="25dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lblnum1"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="-30dp"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="70dp" />
-
-    <TextView
-        android:id="@+id/lblnum2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtnum1"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="37dp"
-        android:text="Num 2:"
-        android:textSize="19dp" />
-
-    <EditText
-        android:id="@+id/txtnum2"
-        android:layout_width="match_parent"
-        android:layout_marginRight="25dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtnum1"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"/>
-
-    <Button
-        android:id="@+id/btnCalcular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/optCalculadora"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:text="Calcular"/>
-
-    <TextView
-        android:id="@+id/lblrespuesta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnCalcular"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="40dp"
-        android:text="Respuesta: ?"
-        android:textSize="25dp"/>
-
-    <RadioGroup
-        android:id="@+id/optCalculadora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtnum2"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp">
-
-        <RadioButton
-            android:id="@+id/optSuma"
+        <EditText
+            android:id="@+id/txtcodigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="SUMA" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginRight="10dp"
+            android:hint="Codigo"
+            android:inputType="text"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false" />
 
-        <RadioButton
-            android:id="@+id/optResta"
-            android:text="RESTA"
+        <EditText
+            android:id="@+id/txtdescripcion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/optMultiplicacion"
-            android:text="MULTIPLICACION"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/optDivision"
-            android:text="DIVISION"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/optExponenciacion"
-            android:text="EXPONENCIACION"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/optPorcentaje"
-            android:text="PORCENTAJE"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/optFactorial"
-            android:text="FACTORIAL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/optRaiz"
-            android:text="RAIZ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtcodigo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="10dp"
+            android:hint="Descripcion"
+            android:inputType="text"
+            android:textAllCaps="false" />
 
-    </RadioGroup>
-</RelativeLayout>
+        <EditText
+            android:id="@+id/txtmarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtdescripcion"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:hint="Marca"
+            android:inputType="text"
+            android:textAllCaps="false" />
+
+        <EditText
+            android:id="@+id/txtpresentacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtmarca"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="10dp"
+            android:hint="Presentacion"
+            android:inputType="text"
+            android:textAllCaps="false" />
+
+        <EditText
+            android:id="@+id/txtprecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtpresentacion"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="10dp"
+            android:hint="Precio"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnGuardarProducto"
+            android:layout_width="264dp"
+            android:layout_height="65dp"
+            android:layout_below="@id/txtprecio"
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Guardar producto"
+            android:textAlignment="center" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnRegresarListaProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@android:drawable/ic_menu_revert" />
+
+        <ImageView
+            android:id="@+id/imgFoto"
+            android:layout_width="165dp"
+            android:layout_height="168dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@android:drawable/ic_menu_camera"
+            android:scaleType="centerCrop" />
+
+
+
+    </RelativeLayout>
 </ScrollView>
