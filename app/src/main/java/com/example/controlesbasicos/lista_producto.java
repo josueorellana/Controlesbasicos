@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
@@ -42,6 +43,7 @@ public class lista_producto extends AppCompatActivity {
     final ArrayList<producto> alProducto=new ArrayList<producto>();
     final ArrayList<producto> alProductoCopy=new ArrayList<producto>();
     JSONArray datosJSON;
+    JSONArray datosJSONFiltrados;
     JSONObject jsonObject;
     ObtenerDatosServidor datosServidor;
     DetectarInternet di;
@@ -82,6 +84,7 @@ public class lista_producto extends AppCompatActivity {
             String data = datosServidor.execute().get();
             jsonObject = new JSONObject(data);
             datosJSON = jsonObject.getJSONArray("rows");
+            filtrarProductos(datosJSON);
             MostrarProductos();
         }catch (Exception e){
             mostrarMsg("Error al obtener datos desde el servidor: "+ e.getMessage());
@@ -89,6 +92,8 @@ public class lista_producto extends AppCompatActivity {
     }
     private void MostrarProductos() {
         try {
+            int estado_activo = 1;
+
             if (datosJSON.length()>0 ) {
                 lts = findViewById(R.id.ltsProducto);
 
@@ -98,18 +103,22 @@ public class lista_producto extends AppCompatActivity {
                 JSONObject misProductosJSONObject;
                 for (int i=0; i<datosJSON.length(); i++) {
                     misProductosJSONObject = datosJSON.getJSONObject(i).getJSONObject("value");
-                    misProductos = new producto(
-                            misProductosJSONObject.getString("_id"),
-                            misProductosJSONObject.getString("_rev"),
-                            misProductosJSONObject.getString("idProducto"),
-                            misProductosJSONObject.getString("codigo"),
-                            misProductosJSONObject.getString("descripcion"),
-                            misProductosJSONObject.getString("marca"),
-                            misProductosJSONObject.getString("presentacion"),
-                            misProductosJSONObject.getString("precio"),
-                            misProductosJSONObject.getString("foto")
-                    );
-                    alProducto.add(misProductos);
+                    int estado = Integer.parseInt(misProductosJSONObject.getString("estado"));
+                    if (estado == estado_activo) {
+                        misProductos = new producto(
+                                misProductosJSONObject.getString("_id"),
+                                misProductosJSONObject.getString("_rev"),
+                                misProductosJSONObject.getString("idProducto"),
+                                misProductosJSONObject.getString("codigo"),
+                                misProductosJSONObject.getString("descripcion"),
+                                misProductosJSONObject.getString("marca"),
+                                misProductosJSONObject.getString("presentacion"),
+                                misProductosJSONObject.getString("precio"),
+                                misProductosJSONObject.getString("foto"),
+                                misProductosJSONObject.getString("estado")
+                        );
+                        alProducto.add(misProductos);
+                    }
                 }
                 adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                 lts.setAdapter(adImagenes);
@@ -121,12 +130,44 @@ public class lista_producto extends AppCompatActivity {
                 adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                 lts.setAdapter(adImagenes);
                 adImagenes.notifyDataSetChanged();
+                alProducto.clear();
+                alProductoCopy.clear();
 
                 mostrarMsg("No hay datos que mostrar.");
 
             }
         } catch (Exception e) {
             mostrarMsg("Error al mostrar datos:" + e.getMessage());
+        }
+    }
+
+    private void filtrarProductos(JSONArray datosJSON) {
+        int estado_activo = 1;
+
+        try {
+            datosJSONFiltrados = new JSONArray(); // Crear un nuevo JSONArray para almacenar los productos filtrados
+
+            for (int i = 0; i < datosJSON.length(); i++) {
+                JSONObject misProductosJSONObject = datosJSON.getJSONObject(i).getJSONObject("value");
+                int estado = Integer.parseInt(misProductosJSONObject.getString("estado"));
+                if (estado == estado_activo) {
+                    JSONObject productoFiltrado = new JSONObject();
+                    productoFiltrado.put("_id", misProductosJSONObject.getString("_id"));
+                    productoFiltrado.put("_rev", misProductosJSONObject.getString("_rev"));
+                    productoFiltrado.put("idProducto", misProductosJSONObject.getString("idProducto"));
+                    productoFiltrado.put("codigo", misProductosJSONObject.getString("codigo"));
+                    productoFiltrado.put("descripcion", misProductosJSONObject.getString("descripcion"));
+                    productoFiltrado.put("marca", misProductosJSONObject.getString("marca"));
+                    productoFiltrado.put("presentacion", misProductosJSONObject.getString("presentacion"));
+                    productoFiltrado.put("precio", misProductosJSONObject.getString("precio"));
+                    productoFiltrado.put("foto", misProductosJSONObject.getString("foto"));
+                    productoFiltrado.put("estado", misProductosJSONObject.getString("estado"));
+
+                    datosJSONFiltrados.put(productoFiltrado); // Agregar el objeto JSONObject al JSONArray
+                }
+            }
+        } catch (JSONException e) {
+            mostrarMsg("Error al filtrar productos:" + e.getMessage());
         }
     }
     @Override
@@ -154,10 +195,12 @@ public class lista_producto extends AppCompatActivity {
                     break;
                 case R.id.mnxModificar:
                     parametros.putString("accion","modificar");
-                    parametros.putString("productos", datosJSON.getJSONObject(posicion).toString());
+                    parametros.putString("productos", datosJSONFiltrados.getJSONObject(posicion).toString());
                     abrirActividad(parametros);
                     break;
                 case R.id.mnxEliminar:
+                    parametros.putString("accion","eliminar");
+                    parametros.putString("productos", datosJSONFiltrados.getJSONObject(posicion).toString());
                     eliminarProducto();
                     break;
             }
@@ -170,18 +213,55 @@ public class lista_producto extends AppCompatActivity {
     }
     private void eliminarProducto(){
         try {
+            JSONObject datosProductos = new JSONObject();
             AlertDialog.Builder confirmacion = new AlertDialog.Builder(lista_producto.this);
+
             confirmacion.setTitle("Esta seguro de Eliminar a: ");
-            confirmacion.setMessage(datosJSON.getJSONObject(posicion).getJSONObject("value").getString("idProducto"));
+            confirmacion.setMessage(datosJSONFiltrados.getJSONObject(posicion).getString("idProducto"));
             confirmacion.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     try {
-                        String respuesta = db_producto.administrar_Productos("eliminar", new String[]{ datosJSON.getJSONObject(posicion).getJSONObject("value").getString("idProducto")});
+
+                        String respuesta = db_producto.administrar_Productos("eliminar", new String[]{ datosJSONFiltrados.getJSONObject(posicion).getString("idProducto")});
                         if (respuesta.equals("ok")) {
                             mostrarMsg("producto eliminado con exito.");
-                            obtenerProducto();
-                            subirDatos();
+                            limpiarPantalla();
+
+                            JSONObject jsonObject = new JSONObject(parametros.getString("productos"));
+
+                            di = new DetectarInternet(getApplicationContext());
+
+                            if(di.hayConexionInternet()){
+                                datosProductos.put("_id", jsonObject.getString("_id"));
+                                datosProductos.put("_rev", jsonObject.getString("_rev"));
+                                datosProductos.put("idProducto", jsonObject.getString("idProducto"));
+                                datosProductos.put("codigo", jsonObject.getString("codigo"));
+                                datosProductos.put("descripcion", jsonObject.getString("descripcion"));
+                                datosProductos.put("marca", jsonObject.getString("marca"));
+                                datosProductos.put("presentacion", jsonObject.getString("presentacion"));
+                                datosProductos.put("precio", jsonObject.getString("precio"));
+                                datosProductos.put("foto", jsonObject.getString("foto"));
+                                datosProductos.put("estado", "0");
+
+                                EnviarDatosServidor objGuardarDatosServidor = new EnviarDatosServidor(getApplicationContext());
+                                respuesta = objGuardarDatosServidor.execute(datosProductos.toString()).get();
+
+                                JSONObject respuestaJSONObject = new JSONObject(respuesta);
+
+                                if( respuestaJSONObject.getBoolean("ok") ){
+                                    mostrarMsg("producto eliminado con exito de la DB.");
+                                    obtenerDatosProductosServidor();
+                                }else{
+                                    obtenerProducto();
+                                    respuesta = "Error al guardar en servidor: "+ respuesta;
+                                }
+
+                            }else{
+                                obtenerProducto();
+                                respuesta = "Error al guardar en servidor: "+ respuesta;
+                            }
+
                         } else {
                             mostrarMsg("Error al eliminar producto: " + respuesta);
                         }
@@ -211,13 +291,22 @@ public class lista_producto extends AppCompatActivity {
 
                     if(misDatosJSONObject.getString("_id").equals("")&& misDatosJSONObject.getString("_rev").equals("")){
                         guardarDatosServidor(misDatosJSONObject);
-                        // mostrarMsg(misDatosJSONObject.toString());
+                        mostrarMsg(misDatosJSONObject.toString());
                     }
                 }
-                //* guardarDatosServidor(misDatosJSONObject);
+                guardarDatosServidor(misDatosJSONObject);
             }
 
         }catch (Exception e){mostrarMsg("Error al sincronizar: "+e.getMessage());}
+    }
+
+    private void limpiarPantalla(){
+        alProducto.clear();
+        adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
+        lts.setAdapter(adImagenes);
+        adImagenes.notifyDataSetChanged();
+        alProducto.clear();
+        alProductoCopy.clear();
     }
 
     private void guardarDatosServidor(JSONObject datosProductos){
@@ -251,6 +340,8 @@ public class lista_producto extends AppCompatActivity {
     }
     private void obtenerProducto(){
         try {
+            datosJSON = new JSONArray();
+
             cProducto = db_producto.consultar_Productos();
             if (cProducto.moveToFirst() ) {
                 datosJSON = new JSONArray();
@@ -266,17 +357,15 @@ public class lista_producto extends AppCompatActivity {
                     jsonObject.put("presentacion", cProducto.getString(6));
                     jsonObject.put("precio", cProducto.getString(7));
                     jsonObject.put("foto", cProducto.getString(8));
+                    jsonObject.put("estado", cProducto.getString(9));
 
                     jsonObjectValue.put("value", jsonObject);
                     datosJSON.put(jsonObjectValue);
                 }while(cProducto.moveToNext());
                 MostrarProductos();
+                filtrarProductos(datosJSON);
             } else {
-                alProducto.clear();
-               adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
-                lts.setAdapter(adImagenes);
-                adImagenes.notifyDataSetChanged();
-
+                MostrarProductos();
                 mostrarMsg("No hay productos que mostrar");
             }
         } catch (Exception e) {

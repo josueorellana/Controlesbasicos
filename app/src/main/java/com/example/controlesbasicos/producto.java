@@ -10,8 +10,11 @@ public class producto {
     String presentacion;
     String precio;
     String foto;
+    String estado;
 
-    public producto(String _id, String _rev, String idProducto, String codigo, String descripcion, String marca, String presentacion, String precio, String foto) {
+
+
+    public producto(String _id, String _rev, String idProducto, String codigo, String descripcion, String marca, String presentacion, String precio, String foto, String estado) {
         this.idProducto = idProducto;
         this.codigo = codigo;
         this.descripcion = descripcion;
@@ -19,6 +22,7 @@ public class producto {
         this.presentacion = presentacion;
         this.precio = precio;
         this.foto=foto;
+        this.estado=estado;
     }
 
     public String getIdProducto() {
@@ -74,6 +78,12 @@ public class producto {
     }
     public void set_rev(String _rev) {
         this._rev = _rev;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
 

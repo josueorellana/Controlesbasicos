@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tempVal;
     Button btn;
     FloatingActionButton btnRegresar;
-    String accion = "nuevo", id = "", foto = "", rev = "", idProducto = "";
+    String accion = "nuevo", id = "", foto = "", rev = "", idProducto = "",estado = "1";
     Intent tomarFotoIntent;
     ImageView img;
     utilidades utls;
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     String precio = tempVal.getText().toString();
 
                     JSONObject datosProductos = new JSONObject();
+
                     if ( accion.equals("modificar") && id.length()>0 && rev.length()>0){
                         datosProductos.put("_id", id);
                         datosProductos.put("_rev", rev);
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     datosProductos.put("presentacion", presentacion);
                     datosProductos.put("precio", precio);
                     datosProductos.put("foto", foto);
+                    datosProductos.put("estado", "1");
                     String respuesta = "";
 
                     di = new DetectarInternet(getApplicationContext());
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     DB db = new DB(getApplicationContext(), "", null, 1);
-                    String[] datos = new String[]{id, rev, idProducto, codigo, descripcion, marca, presentacion, precio, foto};
+                    String[] datos = new String[]{id, rev, idProducto, codigo, descripcion, marca, presentacion, precio, foto,estado};
                     respuesta = db.administrar_Productos(accion, datos);
 
                     if (respuesta.equals("ok")) {
@@ -204,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle parametros = getIntent().getExtras();
             accion = parametros.getString("accion");
             if( accion.equals("modificar") ){
-                JSONObject jsonObject = new JSONObject(parametros.getString("productos")).getJSONObject("value");
+                JSONObject jsonObject = new JSONObject(parametros.getString("productos"));
                 id = jsonObject.getString("_id");
                 rev = jsonObject.getString("_rev");
                 idProducto = jsonObject.getString("idProducto");
