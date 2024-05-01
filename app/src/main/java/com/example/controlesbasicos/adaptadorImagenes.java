@@ -11,15 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.controlesbasicos.R;
+import com.example.controlesbasicos.producto;
+
 import java.util.ArrayList;
 
 public class adaptadorImagenes extends BaseAdapter {
     Context context;
-    ArrayList<com.ugb.controlesbasicos.producto> datosProductoArrayList;
-    com.ugb.controlesbasicos.producto misProducto;
+    ArrayList<producto> datosProductoArrayList;
+    producto misProducto;
     LayoutInflater layoutInflater;
 
-    public adaptadorImagenes(Context context, ArrayList<com.ugb.controlesbasicos.producto> datosProductoArrayList) {
+    public adaptadorImagenes(Context context, ArrayList<producto> datosProductoArrayList) {
         this.context = context;
         this.datosProductoArrayList = datosProductoArrayList;
     }

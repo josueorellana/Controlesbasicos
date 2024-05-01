@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 tempVal = findViewById(R.id.txtprecio);
                 String precio = tempVal.getText().toString();
 
-                com.ugb.controlesbasicos.DB db = new com.ugb.controlesbasicos.DB(getApplicationContext(),"", null, 1);
+                DB db = new DB(getApplicationContext(),"", null, 1);
                 String[] datos = new String[]{id,codigo,descripcion,marca,presentacion,precio,urlCompletaImg};
                 String respuesta = db.administrar_Productos(accion, datos);
                 if( respuesta.equals("ok") ){
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
     private void regresarListaProducto(){
-        Intent abrirVentana = new Intent(getApplicationContext(), com.ugb.controlesbasicos.lista_producto.class);
+        Intent abrirVentana = new Intent(getApplicationContext(), lista_producto.class);
         startActivity(abrirVentana);
     }
 

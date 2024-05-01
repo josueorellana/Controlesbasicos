@@ -21,6 +21,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.controlesbasicos.DB;
+import com.example.controlesbasicos.MainActivity;
+import com.example.controlesbasicos.R;
+import com.example.controlesbasicos.adaptadorImagenes;
+import com.example.controlesbasicos.producto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -30,7 +35,7 @@ public class lista_producto extends AppCompatActivity {
     FloatingActionButton btn;
     ListView lts;
     Cursor cProducto;
-    com.ugb.controlesbasicos.DB db_producto;
+    DB db_producto;
     producto misProductos;
     final ArrayList<producto> alProducto=new ArrayList<producto>();
     final ArrayList<producto> alProductoCopy=new ArrayList<producto>();
@@ -137,7 +142,7 @@ public class lista_producto extends AppCompatActivity {
             alProducto.clear();
             alProductoCopy.clear();
 
-            db_producto = new com.ugb.controlesbasicos.DB(lista_producto.this, "", null, 1);
+            db_producto = new DB(lista_producto.this, "", null, 1);
             cProducto = db_producto.consultar_Productos();
 
             if ( cProducto.moveToFirst() ){
@@ -156,7 +161,7 @@ public class lista_producto extends AppCompatActivity {
                 }while(cProducto.moveToNext());
                 alProductoCopy.addAll(alProducto);
 
-                com.ugb.controlesbasicos.adaptadorImagenes adImagenes = new com.ugb.controlesbasicos.adaptadorImagenes(getApplicationContext(), alProducto);
+                adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                 lts.setAdapter(adImagenes);
 
                 registerForContextMenu(lts);
@@ -198,7 +203,7 @@ public class lista_producto extends AppCompatActivity {
                                 alProducto.add(Producto);
                             }
                         }
-                        com.ugb.controlesbasicos.adaptadorImagenes adImagenes = new com.ugb.controlesbasicos.adaptadorImagenes(getApplicationContext(), alProducto);
+                        adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alProducto);
                         lts.setAdapter(adImagenes);
                     }
                 }catch (Exception e){
