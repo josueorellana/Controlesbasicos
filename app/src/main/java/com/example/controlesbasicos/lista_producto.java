@@ -68,10 +68,10 @@ public class lista_producto extends AppCompatActivity {
             di = new DetectarInternet(getApplicationContext());
             if(di.hayConexionInternet()){
                 obtenerDatosProductosServidor();
+                subirDatos();
             }else {
                 obtenerProducto();
             }
-            subirDatos();
         } catch (Exception e) {
             mostrarMsg("Error al detectar si hay conexion"+ e.getMessage());
         }
@@ -266,7 +266,7 @@ public class lista_producto extends AppCompatActivity {
                             mostrarMsg("Error al eliminar producto: " + respuesta);
                         }
                     }catch (Exception e){
-                        mostrarMsg("Error al eliminar Datos: "+e.getMessage());
+                        mostrarMsg("Erro r al eliminar Datos: "+e.getMessage());
                     }
                 }
             });
@@ -311,16 +311,16 @@ public class lista_producto extends AppCompatActivity {
 
     private void guardarDatosServidor(JSONObject datosProductos){
         try {
-            mostrarMsg("guardarDatosServidor");
+            mostrarMsg("Subiendo Datos");
             String respuesta = "";
-            datosProductos.remove("_id");
-            datosProductos.remove("_rev");
+            datosProductos.remove("");
+            datosProductos.remove("");
             EnviarDatosServidor objGuardarDatosServidor = new EnviarDatosServidor(getApplicationContext());
             respuesta = objGuardarDatosServidor.execute(datosProductos.toString()).get();
             JSONObject respuestaJSONObject = new JSONObject(respuesta);
             mostrarMsg(respuesta);
             if (respuestaJSONObject.getBoolean("ok")) {
-                mostrarMsg("Datos sincronizados los datos");
+                mostrarMsg("Datos sincronizados");
                 obtenerDatosProductosServidor();
             }
             else{
