@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         di = new DetectarInternet(getApplicationContext());
         utls = new utilidades();
-        img = findViewById(R.id.imgFoto);
+        img = findViewById(R.id.imgProducto);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
