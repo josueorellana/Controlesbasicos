@@ -11,10 +11,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.controlesbasicos.ListaCategoriaActivity;
-import com.example.controlesbasicos.R;
 import com.example.controlesbasicos.adapter.PopularAdapter;
-import com.example.controlesbasicos.databinding.ActivityMainBinding;
 import com.example.controlesbasicos.domain.PopularDomain;
+import com.example.fmetzli.R;
+import com.example.fmetzli.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 

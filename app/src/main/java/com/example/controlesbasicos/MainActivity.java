@@ -1,15 +1,17 @@
 package com.example.controlesbasicos;
 
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
-import androidx.core.view.WindowCompat;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.controlesbasicos.databinding.ActivityMain2Binding;
+
+import com.example.fmetzli.R;
+import com.example.fmetzli.databinding.ActivityMain2Binding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 

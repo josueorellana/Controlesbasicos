@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.controlesbasicos.activity.loginActivity;
+import com.example.fmetzli.R;
 
 public class RegistroUsuarioActivity extends AppCompatActivity {
 

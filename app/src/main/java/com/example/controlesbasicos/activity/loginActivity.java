@@ -1,7 +1,5 @@
 package com.example.controlesbasicos.activity;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.controlesbasicos.DB;
 import com.example.controlesbasicos.DBHelper;
 import com.example.controlesbasicos.RegistroUsuarioActivity;
+import com.example.fmetzli.R;
 
 public class loginActivity extends AppCompatActivity {
     private Cursor fila;

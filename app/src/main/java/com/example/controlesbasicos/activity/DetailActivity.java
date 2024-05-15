@@ -1,12 +1,10 @@
 package com.example.controlesbasicos.activity;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.controlesbasicos.R;
+import com.example.fmetzli.R;
 
 public class DetailActivity extends AppCompatActivity {
 

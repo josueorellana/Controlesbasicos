@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.example.controlesbasicos.databinding.ViewholderListBinding;
+import com.example.fmetzli.databinding.ViewholderListBinding;
 import com.example.controlesbasicos.domain.PopularDomain;
 
 import java.util.ArrayList;

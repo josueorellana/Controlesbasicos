@@ -7,6 +7,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.controlesbasicos.activity.MainActivity;
+import com.example.fmetzli.R;
+
 public class ListaCategoriaActivity extends AppCompatActivity {
 
     private Button salircategorias;

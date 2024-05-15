@@ -1,7 +1,5 @@
 package com.example.controlesbasicos.activity;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +8,9 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.controlesbasicos.MainActivity;
-import com.example.controlesbasicos.databinding.ActivityMainBinding;
+import com.example.fmetzli.R;
+import com.example.fmetzli.databinding.ActivityMainBinding;
+
 public class CartBuyActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ImageView salirdecarrito;
