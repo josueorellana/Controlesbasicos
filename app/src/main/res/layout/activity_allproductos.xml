@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="0dp"
+    android:background="#E6E2E2">
+
+    <ImageView
+        android:id="@+id/productos"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/item_1" />
+
+    <TextView
+        android:id="@+id/txtnombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@+id/productos"
+        android:text="Camisas "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/txtdescripciondeproducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtnombre"
+        android:layout_toEndOf="@+id/productos"
+        android:text="talla L, precio:$7.00, 100% algodon" />
+
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productos"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAgregarCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="#7A7676"
+            android:text="Agregar al carrito" />
+
+        <Button
+            android:id="@+id/btnVerDetalles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:backgroundTint="#7A7676"
+            android:text="Ver detalles" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/buttonsLayout"
+        android:layout_marginTop="0dp"
+        android:background="#000000" />
+</RelativeLayout>

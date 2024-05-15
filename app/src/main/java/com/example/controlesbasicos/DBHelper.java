@@ -1,4 +1,4 @@
-package com.example.fmetzli;
+package com.example.controlesbasicos;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

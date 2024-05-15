@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    /* esto se usara para darle tema de color a los objetos solo lo llaman con el nombre puesto
+    entre comillas */
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Purple_Dark">#474747</color>
+    <color name="Purple_Lig">#474747</color>
+    <color name="gris">#7e7e7e</color>
+    <color name="gris_oscuro">#474747</color>
+    <color name="gris_claro">#B6B6B6</color>
+    <color name="purple_200">#EF9A9A</color>
+    <color name="purple_700">#D32F2F</color>
+    <color name="teal_200">#80CBC4</color>
 </resources>

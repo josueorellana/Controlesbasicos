@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "controlesbasicos"
+rootProject.name = "F.Metzli"
 include(":app")
