@@ -1,7 +1,5 @@
 package com.example.controlesbasicos;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fmetzli.activity.MainActivity;
-import com.example.fmetzli.activity.loginActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.controlesbasicos.activity.loginActivity;
 
 public class RegistroUsuarioActivity extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity {
                 tempval = findViewById(R.id.contraseñaUsuario);
                 String password = tempval.getText().toString();
 
-                com.example.fmetzli.DB db = new com.example.fmetzli.DB(getApplicationContext(), "", null, 1);
+                DB db = new DB(getApplicationContext(), "", null, 1);
                 String[] datos = new String[]{id, nombre, edad, telefono, correo, password};
                 String respuesta = db.administrar_produtos(datos);
                 if (respuesta.equals("ok")) {

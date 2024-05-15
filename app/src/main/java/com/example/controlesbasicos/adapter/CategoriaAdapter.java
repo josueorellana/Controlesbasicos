@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fmetzli.databinding.ViewholderListBinding;
-import com.example.fmetzli.domain.CategoriaDomain;
+import com.example.controlesbasicos.databinding.ViewholderListBinding;
+import com.example.controlesbasicos.domain.CategoriaDomain;
 
 import java.util.ArrayList;
 

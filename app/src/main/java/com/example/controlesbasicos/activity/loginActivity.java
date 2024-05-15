@@ -14,10 +14,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.fmetzli.DB;
-import com.example.fmetzli.DBHelper;
-import com.example.fmetzli.R;
-import com.example.fmetzli.RegistroUsuarioActivity;
+import com.example.controlesbasicos.DB;
+import com.example.controlesbasicos.DBHelper;
+import com.example.controlesbasicos.RegistroUsuarioActivity;
 
 public class loginActivity extends AppCompatActivity {
     private Cursor fila;

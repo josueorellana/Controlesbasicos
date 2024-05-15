@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.fmetzli.R;
+import com.example.controlesbasicos.R;
 
 public class CatCaballeros extends AppCompatActivity {
 

@@ -9,7 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.example.fmetzli.databinding.ActivityMain2Binding;
+import com.example.controlesbasicos.databinding.ActivityMain2Binding;
 
 public class MainActivity extends AppCompatActivity {
 
